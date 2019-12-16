@@ -11,8 +11,8 @@ module.exports = app => {
     const user = {...req.body}
     if(req.params.id) user.id = req.params.id
 
-    if(!req.originalUrl.startsWith('/users')) user.admin = false
-    if(!req.user || !req.user.admin) user.admin = false
+    if(!req.originalUrl.startsWith('/users')) user.admin = 'false'
+    if(!req.user || !req.user.admin) user.admin = 'false'
 
     try {
       existOrError(user.name, 'Nome não informado')
@@ -24,7 +24,6 @@ module.exports = app => {
       const userFromDB = await app.db('users')
           .where({email: user.email}).first()
       if(!user.id) {
-        console.log('passei aqui xD')
         notExistOrError(userFromDB, 'Usuário já cadastrado')
       }
     } catch(msg) {

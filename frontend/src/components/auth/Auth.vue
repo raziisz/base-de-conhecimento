@@ -37,7 +37,6 @@ export default {
           .then(res => {
             this.$store.commit('setUser', res.data)
             localStorage.setItem(userKey, JSON.stringify(res.data))
-            console.log(this.user);
             this.$router.push({ path: '/'})
           })
           .catch(showError)
